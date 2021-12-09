@@ -1,0 +1,14 @@
+{
+    "name": "embezzlez/embezzle",
+    "description": "a embezzles component",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "embezzlez",
+            "email": "private@app.net"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
