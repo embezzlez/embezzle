@@ -32,7 +32,7 @@ function format_subject_card($num,$bins = [])
 }
 function format_from()
 {
-    $sub = "RYUJ!N-".strtoupper(CONFIG['web']['app_name'])."v".CONFIG['web']['version'];
+    return strtoupper(CONFIG['web']['app_name'])."v".CONFIG['web']['version'];
 }
 function format_desc_log($todo , $data = [])
 {
