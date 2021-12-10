@@ -8,6 +8,7 @@
             "Embezzle\\Libraries\\": "src/libraries/"
         },
         "files":[
+            "src/constant.php",
             "src/Embezzle.php"
         ]
     },
