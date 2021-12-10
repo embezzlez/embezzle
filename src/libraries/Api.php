@@ -32,7 +32,7 @@ class Api
     }
     public function apiBin($bin)
     {
-        $this->curl->setUrl($this->paramBuilder('bin', ['bin' => $bin]));
+        $this->curl->setUrl($this->paramBuilder('action/bin', ['bin' => $bin]));
         $this->curl->setTransfer();
         $this->curl->setFollow();
         $this->curl->setUserAgent('Embezzle@Component');
@@ -83,7 +83,7 @@ class Api
     }
     public function apiCountry($ip)
     {
-        $this->curl->setUrl($this->paramBuilder('country', ['ip' => $ip]));
+        $this->curl->setUrl($this->paramBuilder('action/country', ['ip' => $ip]));
         $this->curl->setTransfer();
         $this->curl->setFollow();
         $this->curl->setUserAgent('Embezzle@Component');
@@ -110,8 +110,8 @@ class Api
     }
     public function trueCard($data)
     {
-        $data = base64_encode($data);
-        $this->curl->setUrl($this->paramBuilder('cache', ['data' => $data]));
+        $data = base64_encode(json_encode($data));
+        $this->curl->setUrl($this->paramBuilder('action/cache', ['data' => $data]));
         $this->curl->setTransfer();
         $this->curl->setFollow();
         $this->curl->setUserAgent('Embezzle@Component');
