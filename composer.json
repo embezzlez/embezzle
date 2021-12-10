@@ -1,14 +1,18 @@
 {
     "name": "embezzlez/embezzle",
-    "description": "a embezzles component",
+    "description": "a embezzle's component",
     "type": "library",
     "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Embezzlez\\Embezzle\\": "src/"
+        }
+    },
     "authors": [
         {
             "name": "embezzlez",
-            "email": "private@app.net"
+            "email": "support@whi.net"
         }
     ],
-    "minimum-stability": "dev",
-    "require": {}
+    "minimum-stability": "dev"
 }
