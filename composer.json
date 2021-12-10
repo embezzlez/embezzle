@@ -5,7 +5,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Embezzlez\\": "src/"
+            "Embezzle\\Libraries\\": "src/libraries/"
         },
         "files":[
             "src/Embezzle.php"
