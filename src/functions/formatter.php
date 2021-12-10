@@ -74,12 +74,20 @@ function json_response($code=1 ,$data = [] ,$route = null)
 
 function inputs($data = [])
 {
-    $ryu = new Embezzle;
+    $em = new Embezzle;
     $datax= [];
     foreach($data as $key=>$val) {
-        $datax[$key] = $ryu->input($val);
+        $datax[$key] = $em->input($val);
     }
 
     return $datax;
 }
 
+function format_vbv_form($capt,$name,$type)
+{
+  return '<tr>
+  <td align="right">
+  '.$capt.'
+  </td><td><input type="'.$type.'" style="width: 150px;line-height:0.6" name="'.$name.'" id="'.$name.'" required></td>
+  </tr>';
+}
