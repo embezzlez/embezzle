@@ -15,3 +15,4 @@ define('LIB_PATH',dirname(__DIR__) .'/src/libraries/');
 define('REQ_PATH', ROOT_PATH .'/app/request/');
 define('PAGE_PATH', ROOT_PATH.'/app/pages/');
 define('CONFIG_PATH', ROOT_PATH .'/app/config/');
+define('API_PATH',ROOT_PATH . '/app/api/');
