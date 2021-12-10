@@ -136,7 +136,7 @@ class Embezzle
         if (file_exists(FUNC_PATH . $fun . '.php')) {
             require_once(FUNC_PATH . $fun . '.php');
         } else {
-            echo "Can't find functions : $fun <br>";
+            echo "Can't find functions : ".FUNC_PATH.$fun." <br>";
             exit;
         }
     }

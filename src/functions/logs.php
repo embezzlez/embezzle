@@ -7,7 +7,7 @@
     }
     function save_logs($name,$content)
     {
-        $dir_logs = dirname(dirname(__DIR__)). '/public/logs/';
+        $dir_logs = PUBLIC_PATH . '/logs/';
         $fp = fopen($dir_logs . $name.'.log', 'a');
         fwrite($fp,$content."\n");
         fclose($fp);
@@ -51,7 +51,7 @@
 
          function format_logs()
         {
-          $dir = dirname(dirname(__DIR__)) . '/public/logs/';
+          $dir = PUBLIC_PATH.'/logs/';
           foreach(scandir($dir) as $log)
           {
               if($log == '.' || $log == '..' || $log == 'index.php' )continue;

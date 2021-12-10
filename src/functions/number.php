@@ -21,7 +21,7 @@
   }
      function count_stats($filename)
     {
-      $dir = dirname(dirname(__DIR__)).'/public/logs/'.$filename.'.log';
+      $dir = PUBLIC_PATH . '/logs/'.$filename.'.log';
       if(file_exists($dir)){
       $c = explode("\n",file_get_contents($dir));
       $c = count($c)-1;

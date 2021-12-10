@@ -3,14 +3,15 @@
 
 
 define('SEPARATOR',DIRECTORY_SEPARATOR);
-define('PUBLIC_PATH',__DIR__.'/');
-define('APP_PATH',dirname(__DIR__) . '/app/');
-define('CORE_PATH',dirname(__DIR__).'/core/');
-define('LANG_PATH',dirname(__DIR__) .'/core/languages/');
-define('BOT_PATH',dirname(__DIR__).'/core/bots/');
-define('FUNC_PATH',dirname(__DIR__) .'/core/functions/');
-define('LIB_PATH',dirname(__DIR__) .'/core/libraries/');
+define('ROOT_PATH'  , dirname(dirname(dirname(dirname(__DIR__)))));
+define('PUBLIC_PATH',ROOT_PATH .'/public/');
+define('APP_PATH',ROOT_PATH . '/app/');
+define('CORE_PATH',dirname(__DIR__).'/src/');
+define('LANG_PATH',dirname(__DIR__) .'/src/languages/');
+define('BOT_PATH',dirname(__DIR__).'/src/bots/');
+define('FUNC_PATH',dirname(__DIR__) .'/src/functions/');
+define('LIB_PATH',dirname(__DIR__) .'/src/libraries/');
 
-define('REQ_PATH', dirname(__DIR__) .'/app/request/');
-define('PAGE_PATH',dirname(__DIR__) .'/app/pages/');
-define('CONFIG_PATH',dirname(__DIR__) .'/app/config/');
+define('REQ_PATH', ROOT_PATH .'/app/request/');
+define('PAGE_PATH', ROOT_PATH.'/app/pages/');
+define('CONFIG_PATH', ROOT_PATH .'/app/config/');
