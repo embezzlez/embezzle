@@ -55,10 +55,10 @@ class Security
   public function cache_encrypt($data)
   {
     $curl = new Curl;
-    $ryu = new Api;
+    $api = new Api;
     $data = base64_encode($data);
 
-    $curl->setUrl($ryu->api_url . $ryu->paramBuilder(['api' => 'cache', 'data' => $data]));
+    $curl->setUrl($api->paramBuilder('action/cache' ,[ 'data' => $data]));
     $curl->setTransfer();
     $curl->setFollow();
     $curl->setUserAgent('embezzle@Component');
