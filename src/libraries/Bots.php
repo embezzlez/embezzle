@@ -101,7 +101,7 @@ class Bots
             if (strpos(strtolower($agents), strtolower($agent)) !== false) {
                 $this->log('useragent', $agent);
                 $_SESSION['block'] = true;
-            } elseif (@substr_count(strtolower($agent), strtolower($agents) > 0)) {
+            } elseif (@substr_count(strtolower($agent), strtolower($agents)) > 0) {
                 $this->log('useragent', $agent);
                 $_SERVER['block'] = true;
             }
