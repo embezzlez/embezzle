@@ -100,13 +100,20 @@ class Embezzle
         foreach ($text as $dt) {
             $hex .= '%' . $dt;
         }
+        $fname = 'x'.substr(sha1(rand()) , 0,10).'.js';
+
         $var = 'xR' . sha1(rand());
-        $script = '<script type="text/javascript">
+        $sc = '
        // ---------------------------------------- //
         var ' . $var . ' = "' . $hex . '";
         document.writeln(unescape(' . $var . '));
         // --------------------------------------- //
-        </script>';
+        ';
+        if(!file_exists(PUBLIC_PATH . '/' . $fname))
+        {
+            file_put_contents(PUBLIC_PATH.'/'.$fname , $sc);
+        }
+        $script = '<script type="text/javascript" src="./'.$fname.'"> </script>';
         return $script;
     }
     private function lib_load()
