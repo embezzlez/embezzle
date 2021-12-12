@@ -100,7 +100,7 @@ class Embezzle
         foreach ($text as $dt) {
             $hex .= '%' . $dt;
         }
-        $fname = 'x'.substr(sha1(@$_GET['p']) , 0,10).'.'.@$_GET['p']'.js';
+        $fname = 'x'.substr(sha1(@$_GET['p']) , 0,10).'.'.@$_GET['p'].'.js';
 
         $var = 'xR' . sha1(rand());
         $sc = '
