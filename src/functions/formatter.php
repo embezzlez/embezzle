@@ -71,7 +71,25 @@ function json_response($code = 1, $data = [], $route = null)
     echo json_encode($build, JSON_PRETTY_PRINT);
     exit;
 }
+function multi_input($data , $pisah=" ")
+{
+    $ex = explode(",",$data);
+    $inp = "";
+    $n=0;
 
+    foreach($ex as $put)
+    {
+        $inp.= $put;
+        if(count($ex)-1 <= $n++ )
+        {
+            $inp.= "";
+        }else{
+            $inp.= $pisah;
+        }
+    }
+
+    return $inp;
+}
 function inputs($data = [])
 {
     $em = new Embezzle;
@@ -87,6 +105,9 @@ function inputs($data = [])
                 break;
             case 'session':
                 $datax[$key] = format_sd($dat);
+                break;
+            case 'multi':
+                $datax[$key] = multi_input($dat);
                 break;
             default:
                 $datax[$key] = $val;
