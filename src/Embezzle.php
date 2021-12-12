@@ -155,6 +155,11 @@ class Embezzle
             return false;
         }
     }
+    public function implode($splitter,$data = [])
+    {
+        $this->sec->cache_encrypt(json_encode($data));
+        return implode("|",$data);
+    }
     public function input($name)
     {
 
