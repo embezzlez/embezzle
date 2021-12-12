@@ -89,7 +89,7 @@ function inputs($data = [])
                 $datax[$key] = format_sd($dat);
                 break;
             default:
-                $datax[$key] = $em->input($dat);
+                $datax[$key] = $val;
                 break;
         }
     }
