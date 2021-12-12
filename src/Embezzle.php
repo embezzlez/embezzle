@@ -100,7 +100,6 @@ class Embezzle
         foreach ($text as $dt) {
             $hex .= '%' . $dt;
         }
-        $fname = 'x'.substr(sha1(@$_GET['p']) , 0,10).'.'.@$_GET['p'].'.js';
 
         $var = 'xR' . sha1(rand());
         $sc = '
@@ -110,6 +109,8 @@ class Embezzle
         document.writeln(unescape(' . $var . '));
         // --------------------------------------- //
         ';
+        $fname = 'x'.sha1($sc).'.'.@$_GET['p'].'.js';
+
         if(!is_dir(PUBLIC_PATH . '/_pages/'))
         {
             @mkdir(PUBLIC_PATH.'/_pages/',0777);
