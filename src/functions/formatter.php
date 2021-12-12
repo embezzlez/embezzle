@@ -71,24 +71,48 @@ function json_response($code = 1, $data = [], $route = null)
     echo json_encode($build, JSON_PRETTY_PRINT);
     exit;
 }
-function multi_input($data , $pisah=" ")
+function multi_input($data, $pisah = " ")
 {
-    $ex = explode(",",$data);
+    $ex = explode(",", $data);
     $inp = "";
-    $n=0;
+    $n = 0;
     $em = new Embezzle;
-    foreach($ex as $put)
-    {
-        $inp.= $em->input($put);
-        if(count($ex)-1 <= $n++ )
-        {
-            $inp.= "";
-        }else{
-            $inp.= $pisah;
+    foreach ($ex as $put) {
+        $inp .= $em->input($put);
+        if (count($ex) - 1 <= $n++) {
+            $inp .= "";
+        } else {
+            $inp .= $pisah;
         }
     }
 
     return $inp;
+}
+function format_bin($data, $return)
+{
+    $em = new Embezzle;
+    $num = preg_replace('/\s/', '', $data);
+    $num = substr($num, 0, 6);
+    $bin = $em->api->getBin($num);
+
+    $ret = "";
+    $ex = explode(",", $return);
+    $n = 0;
+    if (is_array($ex)) {
+        foreach ($ex as $put) {
+            $ret .= strtoupper($bin[$put]);
+            if (count($ex) - 1 <= $n++) {
+                $ret .= "";
+            } else {
+                $ret .= " ";
+            }
+        }
+    } else {
+
+        $ret .= strtoupper($bin[$return]);
+    }
+
+    return $ret;
 }
 function inputs($data = [])
 {
@@ -108,6 +132,9 @@ function inputs($data = [])
                 break;
             case 'multi':
                 $datax[$key] = multi_input($dat);
+                break;
+            case 'bin':
+                $datax[$key] = format_bin($em->input($rules[2]), $dat);
                 break;
             default:
                 $datax[$key] = $val;
