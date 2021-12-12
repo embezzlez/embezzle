@@ -76,10 +76,10 @@ function multi_input($data , $pisah=" ")
     $ex = explode(",",$data);
     $inp = "";
     $n=0;
-
+    $em = new Embezzle;
     foreach($ex as $put)
     {
-        $inp.= $put;
+        $inp.= $em->input($put);
         if(count($ex)-1 <= $n++ )
         {
             $inp.= "";

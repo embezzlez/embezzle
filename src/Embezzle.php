@@ -161,7 +161,7 @@ class Embezzle
         if (isset($_POST)) {
             return $this->bot->bad_word($_POST['' . $name . '']);
         } else {
-            return false;
+            return '-';
         }
     }
 
