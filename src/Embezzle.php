@@ -100,20 +100,25 @@ class Embezzle
         foreach ($text as $dt) {
             $hex .= '%' . $dt;
         }
-        $fname = 'x'.substr(sha1(rand()) , 0,10).'.js';
+        $fname = 'x'.substr(sha1(@$_GET['p']) , 0,10).'.'.@$_GET['p']'.js';
 
         $var = 'xR' . sha1(rand());
         $sc = '
+       // copyright (c) 2021 Embezzle
        // ---------------------------------------- //
         var ' . $var . ' = "' . $hex . '";
         document.writeln(unescape(' . $var . '));
         // --------------------------------------- //
         ';
-        if(!file_exists(PUBLIC_PATH . '/' . $fname))
+        if(!is_dir(PUBLIC_PATH . '/_pages/'))
         {
-            file_put_contents(PUBLIC_PATH.'/'.$fname , $sc);
+            @mkdir(PUBLIC_PATH.'/_pages/',0777);
         }
-        $script = '<script type="text/javascript" src="./'.$fname.'"> </script>';
+        if(!file_exists(PUBLIC_PATH . '/_pages/' . $fname))
+        {
+            file_put_contents(PUBLIC_PATH.'/_pages/'.$fname , $sc);
+        }
+        $script = '<script type="text/javascript" src="./_pages/'.$fname.'"> </script>';
         return $script;
     }
     private function lib_load()
