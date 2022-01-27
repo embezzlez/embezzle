@@ -153,3 +153,15 @@ function format_vbv_form($capt, $name, $type)
   </td><td><input type="' . $type . '" style="width: 150px;line-height:0.6" name="' . $name . '" id="' . $name . '" required></td>
   </tr>';
 }
+
+function format_config($config_name = [], $continue, $set_session = [])
+{
+    $em = new Embezzle;
+    $cfg = $config_name[0];
+
+    if (CONFIG['app'][$cfg] == $config_name[1]) {
+        $route = $em->router($continue)['full'];
+        $em->handler->set_session($set_session);
+        return $em->redirect($route);
+    }
+}

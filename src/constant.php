@@ -16,3 +16,6 @@ define('REQ_PATH', ROOT_PATH .'/app/request/');
 define('PAGE_PATH', ROOT_PATH.'/app/pages/');
 define('CONFIG_PATH', ROOT_PATH .'/app/config/');
 define('API_PATH',ROOT_PATH . '/app/api/');
+
+define('HTML_PATH' , dirname(__DIR__).'/src/html/');
+define('HTML_APP_PATH' , ROOT_PATH.'/app/html/');

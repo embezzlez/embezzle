@@ -1,5 +1,5 @@
 <?php
-function generate_html($prop = [],$title = 'RyuJin-Framework')
+function generate_html($prop = [],$title = 'BADYOUTH')
 {
   echo '<!DOCTYPE html>
   <html>

