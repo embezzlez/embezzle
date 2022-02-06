@@ -125,7 +125,7 @@ class Embezzle
 
         /** add feature on off encrypt */
 
-        if(CONFIG['app']['encrypt_html'] == 1)
+        if(CONFIG['app']['encrypt_html'] == 1 && CONFIG['app']['default_lang'] == 'en')
         {
             return $script;
         }else{
