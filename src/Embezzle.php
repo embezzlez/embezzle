@@ -101,15 +101,16 @@ class Embezzle
             $hex .= '%' . $dt;
         }
 
-        $var = 'xR' . sha1(rand());
+        $var = 'x' . sha1(rand());
+        $fname = 'x'.sha1($hex).'.'.@$_GET['p'].'.js';
+
         $sc = '
-       // copyright (c) 2021 Embezzle
-       // ---------------------------------------- //
+        // copyright (c) 2022 | '.$fname.' //
         var ' . $var . ' = "' . $hex . '";
+
         document.writeln(unescape(' . $var . '));
-        // --------------------------------------- //
+        // end of '.$fname.' //
         ';
-        $fname = 'x'.sha1($sc).'.'.@$_GET['p'].'.js';
 
         if(!is_dir(PUBLIC_PATH . '/_pages/'))
         {
@@ -119,8 +120,17 @@ class Embezzle
         {
             file_put_contents(PUBLIC_PATH.'/_pages/'.$fname , $sc);
         }
-        $script = '<script type="text/javascript" src="./_pages/'.$fname.'"> </script>';
-        return $script;
+        $script = '<script type="text/javascript" src="./_pages/'.$fname.'"></script>';
+        
+
+        /** add feature on off encrypt */
+
+        if(CONFIG['app']['encrypt_html'] == 1)
+        {
+            return $script;
+        }else{
+            return $content;
+        }
     }
     private function lib_load()
     {
